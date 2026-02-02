@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Democracy Manifest ($DM) | A Succulent Chinese Meal of a Memecoin</title>
+    <meta name="description" content="Honoring Jack Karlson's legendary 1991 arrest. $DM - The most succulent memecoin on Solana.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="DM11.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #FFD700;
+            --black: #000000;
+            --cyber-green: #00ff41;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--black);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Matrix Rain Background */
+        #matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.12;
+            pointer-events: none;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .hero-image {
+            max-width: 900px;
+            width: 100%;
+            margin-bottom: 50px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3rem, 10vw, 7rem);
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+            margin-bottom: 25px;
+            letter-spacing: 5px;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.3rem, 3vw, 2.2rem);
+            color: var(--cyber-green);
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+        }
+
+        .hero-description {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        /* CTA Buttons */
+        .cta-container {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 70px;
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, var(--gold), #FFA500);
+            color: var(--black);
+            padding: 22px 50px;
+            font-size: 1.4rem;
+            font-weight: 900;
+            text-decoration: none;
+            border-radius: 12px;
+            border: 3px solid var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.7);
+        }
+
+        .cta-btn-secondary {
+            background: transparent;
+            color: var(--gold);
+        }
+
+        .cta-btn-secondary:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        /* Contract Address */
+        .contract-box {
+            background: rgba(255, 215, 0, 0.08);
+            border: 2px solid var(--gold);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .contract-label {
+            font-size: 1rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .contract-address {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            word-break: break-all;
+            color: white;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 18px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .copy-btn {
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+        }
+
+        /* Spinning Coin Section */
+        .spinning-coin-section {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .coin-container {
+            perspective: 1200px;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+        }
+
+        .spinning-coin {
+            width: 350px;
+            height: 350px;
+            animation: spin3D 5s linear infinite;
+            filter: drop-shadow(0 0 50px rgba(255, 215, 0, 0.9));
+        }
+
+        @keyframes spin3D {
+            0% {
+                transform: rotateY(0deg);
+            }
+            50% {
+                transform: rotateY(180deg);
+            }
+            100% {
+                transform: rotateY(360deg);
+            }
+        }
+
+        .judo-quote {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--gold);
+            text-shadow: 0 0 25px rgba(255, 215, 0, 0.7);
+            letter-spacing: 4px;
+            font-style: italic;
+            animation: textGlow 2.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from {
+                text-shadow: 0 0 25px rgba(255, 215, 0, 0.7);
+            }
+            to {
+                text-shadow: 0 0 40px rgba(255, 215, 0, 1);
+            }
+        }
+
+        /* Why $DM Section */
+        .why-section {
+            padding: 80px 20px;
+        }
+
+        /* Vintage Cinema Section */
+        .cinema-section {
+            padding: 80px 20px;
+        }
+
+        .cinema-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 60px;
+            font-style: italic;
+        }
+
+        .cinema-frame {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            border: 15px solid #2a2a2a;
+            border-radius: 10px;
+            padding: 30px 20px;
+            box-shadow: 
+                0 0 0 3px #3a3a3a,
+                0 20px 60px rgba(0, 0, 0, 0.8),
+                inset 0 0 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .film-strip {
+            position: absolute;
+            width: 30px;
+            height: calc(100% - 60px);
+            top: 30px;
+            background: repeating-linear-gradient(
+                0deg,
+                #222 0px,
+                #222 15px,
+                #333 15px,
+                #333 20px
+            );
+            border-left: 2px solid #444;
+            border-right: 2px solid #444;
+        }
+
+        .film-strip-left {
+            left: -20px;
+        }
+
+        .film-strip-right {
+            right: -20px;
+        }
+
+        .film-strip::before,
+        .film-strip::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #000;
+            border: 1px solid #555;
+            border-radius: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .film-strip::before {
+            top: 10px;
+        }
+
+        .film-strip::after {
+            bottom: 10px;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            background: #000;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
+        }
+
+        .video-container video {
+            width: 100%;
+            display: block;
+            filter: contrast(1.1) sepia(0.1);
+        }
+
+        /* Film Grain Effect */
+        .film-grain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGQ9Ik0wIDBoMzAwdjMwMEgweiIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIuMDUiLz48L3N2Zz4=');
+            pointer-events: none;
+            opacity: 0.3;
+            z-index: 2;
+            animation: grainFlicker 0.15s infinite;
+        }
+
+        @keyframes grainFlicker {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.25; }
+        }
+
+        .cinema-label {
+            margin-top: 25px;
+            text-align: center;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            padding: 15px;
+            border-top: 2px solid #3a3a3a;
+            border-bottom: 2px solid #3a3a3a;
+        }
+
+        .label-text {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            color: var(--gold);
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .cinema-frame {
+                padding: 20px 10px;
+                border-width: 10px;
+            }
+
+            .film-strip {
+                width: 20px;
+            }
+
+            .film-strip-left {
+                left: -15px;
+            }
+
+            .film-strip-right {
+                right: -15px;
+            }
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3rem, 7vw, 5rem);
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 70px;
+            letter-spacing: 5px;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .why-card {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.12), rgba(0, 0, 0, 0.4));
+            border: 3px solid var(--gold);
+            border-radius: 25px;
+            padding: 50px 35px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .why-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.4);
+            border-color: var(--cyber-green);
+        }
+
+        .why-icon {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            border-radius: 50%;
+            border: 4px solid var(--gold);
+            object-fit: cover;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
+        }
+
+        .why-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+        }
+
+        .why-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Tokenomics */
+        .tokenomics {
+            padding: 80px 20px;
+        }
+
+        .tokenomics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 35px;
+            max-width: 1300px;
+            margin: 70px auto 0;
+        }
+
+        .token-card {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(0, 0, 0, 0.6));
+            border: 3px solid var(--gold);
+            border-radius: 20px;
+            padding: 45px 25px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .token-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.15), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+        }
+
+        .token-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.6);
+        }
+
+        .token-card:hover::before {
+            left: 100%;
+        }
+
+        .token-percentage {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            color: var(--gold);
+            text-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .token-label {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--cyber-green);
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .token-amount {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .token-footer {
+            text-align: center;
+            margin-top: 70px;
+            padding: 35px;
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+        }
+
+        .token-footer p {
+            font-size: 1.6rem;
+            color: var(--cyber-green);
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        /* Tribute */
+        .tribute {
+            padding: 80px 20px;
+        }
+
+        .tribute-content {
+            max-width: 950px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .tribute-text {
+            font-size: 1.3rem;
+            line-height: 1.9;
+            margin-bottom: 35px;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .tribute-quote {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(1.8rem, 5vw, 3.5rem);
+            color: var(--gold);
+            text-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+            padding: 50px;
+            margin: 50px 0;
+            border: 3px solid var(--gold);
+            border-radius: 20px;
+            background: rgba(255, 215, 0, 0.06);
+            letter-spacing: 3px;
+            line-height: 1.5;
+        }
+
+        .charge-box {
+            font-size: 2rem;
+            color: var(--cyber-green);
+            font-weight: 700;
+            margin: 50px 0;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(0, 255, 65, 0.12), rgba(0, 0, 0, 0.5));
+            border: 2px solid var(--cyber-green);
+            border-radius: 18px;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(180deg, transparent, rgba(10, 10, 10, 0.95));
+            padding: 70px 20px 50px;
+            text-align: center;
+            border-top: 2px solid var(--gold);
+        }
+
+        .footer-content {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .social-link {
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--gold), #FFA500);
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            color: var(--black);
+            font-size: 2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+        }
+
+        .social-link:hover {
+            transform: translateY(-8px) scale(1.15);
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.7);
+        }
+
+        .footer-text {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.7;
+            margin-top: 25px;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .spinning-coin {
+                width: 250px;
+                height: 250px;
+            }
+
+            .cta-container {
+                flex-direction: column;
+            }
+
+            .cta-btn {
+                width: 100%;
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tokenomics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Matrix Background -->
+    <canvas id="matrix-bg"></canvas>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <img src="DM10.png" alt="This is Democracy Manifest" class="hero-image">
+            
+            <h1>DEMOCRACY MANIFEST</h1>
+            <p class="hero-subtitle">The Most Succulent Memecoin on Solana</p>
+            
+            <p class="hero-description">
+                In 1991, Jack Karlson gave the world the greatest arrest video of all time. 
+                Now, his legendary words live forever on the blockchain. 
+                <strong style="color: var(--gold);">This is democracy manifest!</strong>
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="cta-container">
+                <a href="https://raydium.io/swap/?inputCurrency=sol&outputCurrency=42JxP81kckK4hv6rS44RXGXs9PVGjaCT6ggyAzUzC" class="cta-btn" target="_blank">BUY $DM</a>
+                <a href="https://dexscreener.com/solana/42JxP81kckK4hv6rS44RXGXs9PVGjaCT6ggyAzUzC" class="cta-btn cta-btn-secondary" target="_blank">VIEW CHART</a>
+                <a href="#" class="cta-btn cta-btn-secondary">JOIN TELEGRAM</a>
+            </div>
+
+            <!-- Contract Address -->
+            <div class="contract-box">
+                <div class="contract-label">Contract Address (CA)</div>
+                <div class="contract-address" id="contractAddress">42JxP81kckK4hv6rS44RXGXs9PVGjaCT6ggyAzUzC</div>
+                <button onclick="copyContract()" class="copy-btn">Copy CA</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spinning Coin Section -->
+    <section class="spinning-coin-section">
+        <div class="container">
+            <div class="coin-container">
+                <img src="DM3.png" alt="$DM Spinning Coin" class="spinning-coin">
+            </div>
+            <p class="judo-quote">"I see you know your Judo well"</p>
+        </div>
+    </section>
+
+    <!-- Vintage Cinema Video Section -->
+    <section class="cinema-section">
+        <div class="container">
+            <h2 class="section-title">THE LEGENDARY MOMENT</h2>
+            <p class="cinema-subtitle">Brisbane, 1991 - The Arrest That Made History</p>
+            
+            <div class="cinema-frame">
+                <div class="film-strip film-strip-left"></div>
+                <div class="film-strip film-strip-right"></div>
+                
+                <div class="video-container">
+                    <div class="film-grain"></div>
+                    <video id="arrestVideo" controls>
+                        <source src="arrest_video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                
+                <div class="cinema-label">
+                    <span class="label-text">🎬 DEMOCRACY MANIFEST - ORIGINAL FOOTAGE 1991 🎬</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Why $DM Section -->
+    <section class="why-section">
+        <div class="container">
+            <h2 class="section-title">WHY $DM?</h2>
+            
+            <div class="why-grid">
+                <div class="why-card">
+                    <img src="DM21.png" alt="The Meme" class="why-icon">
+                    <h3 class="why-title">THE MEME</h3>
+                    <p class="why-text">
+                        "This is democracy manifest!" - Jack Karlson's legendary 1991 arrest 
+                        gave us the most quotable Australian moment in history.
+                    </p>
+                </div>
+
+                <div class="why-card">
+                    <img src="DM10.png" alt="The Community" class="why-icon">
+                    <h3 class="why-title">THE COMMUNITY</h3>
+                    <p class="why-text">
+                        100% community-driven. No jeet tax. LP locked. Diamond hands only - 
+                        get your hand off our tokens!
+                    </p>
+                </div>
+
+                <div class="why-card">
+                    <img src="DM20.jpg" alt="The Legend" class="why-icon">
+                    <h3 class="why-title">THE LEGEND</h3>
+                    <p class="why-text">
+                        Honoring Jack Karlson (1942-2024). A true aussie icon whose words 
+                        will echo forever. This one's for you, Jack 🇦🇺
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tokenomics -->
+    <section class="tokenomics">
+        <div class="container">
+            <h2 class="section-title">TOKENOMICS</h2>
+            
+            <div class="tokenomics-grid">
+                <div class="token-card">
+                    <div class="token-percentage">50%</div>
+                    <div class="token-label">LIQUIDITY POOL</div>
+                    <div class="token-amount">500M $DM<br>LOCKED 6 MONTHS</div>
+                </div>
+
+                <div class="token-card">
+                    <div class="token-percentage">25%</div>
+                    <div class="token-label">AIRDROPS</div>
+                    <div class="token-amount">250M $DM<br>Community Rewards</div>
+                </div>
+
+                <div class="token-card">
+                    <div class="token-percentage">15%</div>
+                    <div class="token-label">FOUNDER</div>
+                    <div class="token-amount">150M $DM<br>LOCKED 6 MONTHS</div>
+                </div>
+
+                <div class="token-card">
+                    <div class="token-percentage">5%</div>
+                    <div class="token-label">MARKETING</div>
+                    <div class="token-amount">50M $DM<br>Partnerships</div>
+                </div>
+
+                <div class="token-card">
+                    <div class="token-percentage">5%</div>
+                    <div class="token-label">BURNT</div>
+                    <div class="token-amount">50M $DM<br>Dead Wallet 🔥</div>
+                </div>
+            </div>
+
+            <div class="token-footer">
+                <p>✅ 0% TAX • ✅ LP LOCKED • ✅ COMMUNITY OWNED</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tribute Section -->
+    <section class="tribute">
+        <div class="container">
+            <div class="tribute-content">
+                <h2 class="section-title">THE LEGEND LIVES ON</h2>
+                
+                <p class="tribute-text">
+                    In 1991, Jack Karlson was being arrested outside a Brisbane Chinese restaurant 
+                    when he delivered the most theatrical protest in Australian history. His words 
+                    became an internet legend - sampled by Mac Miller, referenced in movies, and 
+                    beloved globally.
+                </p>
+
+                <div class="tribute-quote">
+                    "GET YOUR HAND OFF MY PENIS!<br>
+                    THIS IS DEMOCRACY MANIFEST!"
+                </div>
+
+                <div class="charge-box">
+                    "What's the charge? Eating a meal? A succulent Chinese meal?" 🍜
+                </div>
+
+                <p class="tribute-text">
+                    Jack Karlson (1942-2024) was a chess player, an artist, a character, 
+                    and ultimately an aussie icon. $DM celebrates his legendary moment and 
+                    keeps his words immortal on the blockchain.
+                </p>
+
+                <p class="tribute-text" style="color: var(--gold); font-size: 1.6rem; margin-top: 50px;">
+                    Legend never dies. 🇦🇺✨
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" class="social-link">𝕏</a>
+                <a href="#" class="social-link">✈</a>
+                <a href="https://dexscreener.com/solana/42JxP81kckK4hv6rS44RXGXs9PVGjaCT6ggyAzUzC" class="social-link" target="_blank">📊</a>
+            </div>
+
+            <p style="font-size: 1.3rem; margin: 25px 0; color: var(--gold);">
+                <strong>CA:</strong> 42JxP81kckK4hv6rS44RXGXs9PVGjaCT6ggyAzUzC
+            </p>
+
+            <p class="footer-text">
+                $DM is a meme coin with no intrinsic value or expectation of financial return. 
+                This token is created purely for entertainment and to honor Jack Karlson's legacy.
+            </p>
+
+            <p class="footer-text" style="margin-top: 35px;">
+                © 2025 Democracy Manifest Coin. All rights reserved.<br>
+                Not affiliated with Jack Karlson's estate.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Matrix Rain Effect
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const chars = 'DEMOCRACYMANIFEST$DM0123456789';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+
+        for (let i = 0; i < columns; i++) {
+            drops[i] = Math.random() * canvas.height;
+        }
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#00ff41';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 50);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Copy Contract Address
+        function copyContract() {
+            const contractAddress = document.getElementById('contractAddress').textContent;
+            navigator.clipboard.writeText(contractAddress).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = 'COPIED!';
+                btn.style.background = '#00ff41';
+                setTimeout(() => {
+                    btn.textContent = 'Copy CA';
+                    btn.style.background = '#FFD700';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
